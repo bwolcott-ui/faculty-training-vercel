@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fix Your Golf Swing | Simple Self‑Assessment, Drills & Plan</title>
-  <meta name="description" content="A clean, fast site that helps golfers quickly diagnose common swing faults and get a personalized practice plan with drills and checkpoints." />
+  <title>Fix Your Golf Swing | Self‑Assessment, Drills & Visual Guides</title>
+  <meta name="description" content="Diagnose your golf swing, get targeted drills, and learn by seeing—now with curated photos of pros and iconic courses for better visualization." />
   <meta name="theme-color" content="#0b7d5c" />
   <meta property="og:title" content="Fix Your Golf Swing" />
-  <meta property="og:description" content="Self‑assess your swing, learn fundamentals, and get a practice plan in minutes." />
+  <meta property="og:description" content="Self‑assess your swing, learn fundamentals, and get a practice plan—enhanced with course & pro visuals." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://dummyimage.com/1200x630/0b7d5c/ffffff&text=Fix+Your+Golf+Swing" />
+  <meta property="og:image" content="https://source.unsplash.com/1200x630/?golf,tee,course" />
   <meta name="color-scheme" content="light dark" />
   <style>
     /* ---------- Design tokens ---------- */
@@ -28,6 +28,7 @@
       --radius: 18px;
       --maxw: 1200px;
       --focus: 0 0 0 3px rgba(34,211,238,.45);
+      --hero: url('https://source.unsplash.com/1600x900/?golf,tee,course');
     }
 
     @media (prefers-color-scheme: light) {
@@ -50,40 +51,24 @@
     .pill { display:inline-flex; gap:8px; align-items:center; padding:6px 12px; border-radius:999px; background: rgba(34,211,238,.12); color: var(--text); font-weight:600; }
 
     /* ---------- Hero ---------- */
-    header.hero { position: relative; overflow: hidden; background-image: var(--hero, url('https://source.unsplash.com/1600x900/?golf,tee,course')); background-size: cover; background-position: center; }
-    header.hero::before { content: ""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25) 35%, rgba(0,0,0,.55)); mix-blend: multiply; }
-    header.hero .hero-inner { position: relative; z-index: 1; }
-    .image-credit { position:absolute; right:12px; bottom:8px; font-size:12px; color: rgba(255,255,255,.8); backdrop-filter: blur(6px); background: rgba(0,0,0,.25); padding:4px 8px; border-radius:999px; }
-    .hero-collage { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-    .hero-collage img { width:100%; height: 200px; object-fit: cover; border-radius: 12px; border:1px solid rgba(255,255,255,.15); box-shadow: var(--shadow); }
-    @media (min-width: 900px){ .hero-collage img{ height: 260px; } }
-    .card.photo { padding:0; overflow:hidden; }
-    .card.photo img{ display:block; width:100%; height:220px; object-fit:cover; }
-    .card.photo .cap{ padding:12px 14px; }
+    header.hero { position: relative; overflow: hidden; background-image: var(--hero); background-size: cover; background-position: center; }
+    header.hero::before { content: ""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.3) 40%, rgba(0,0,0,.65)); mix-blend: multiply; }
+    header.hero .hero-inner { position: relative; z-index: 1; display:grid; grid-template-columns: 1.2fr 1fr; gap:32px; align-items:center; padding: 64px 24px 28px; }
 
-    /* ---------- Gallery ---------- */
-    .gallery { display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
-    @media (max-width: 900px) { .gallery { grid-template-columns: 1fr; } }
-    .gallery figure { margin:0; position:relative; overflow:hidden; border-radius: var(--radius); border:1px solid rgba(255,255,255,.12); box-shadow: var(--shadow); }
-    .gallery img { width:100%; height:260px; object-fit:cover; display:block; }
-    .gallery figcaption { position:absolute; left:0; right:0; bottom:0; padding:10px 12px; font-weight:800; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.55)); }
-    .hero-inner { display:grid; grid-template-columns: 1.2fr 1fr; gap:32px; align-items:center; padding: 48px 24px 24px; }
-    .title { font-size: clamp(32px, 4vw, 56px); line-height:1.05; letter-spacing:-.02em; margin: 8px 0 12px; }
-    .subtitle { font-size: clamp(16px, 2.2vw, 20px); color: var(--muted); max-width: 60ch; }
+    .title { font-size: clamp(32px, 4vw, 56px); line-height:1.05; letter-spacing:-.02em; margin: 8px 0 12px; text-shadow: 0 8px 24px rgba(0,0,0,.55); }
+    .subtitle { font-size: clamp(16px, 2.2vw, 20px); color: #defffa; max-width: 60ch; text-shadow: 0 8px 24px rgba(0,0,0,.6); }
 
     .cta { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
     .btn { cursor:pointer; border:none; border-radius: 12px; padding: 14px 18px; font-weight:700; box-shadow: var(--shadow); transition: transform .12s ease, box-shadow .12s ease; }
     .btn-primary { background: linear-gradient(135deg, var(--brand) 0%, var(--brand-600) 100%); color:#06261d; }
-    .btn-ghost { background: rgba(34,211,238, .12); color: var(--text); }
+    .btn-ghost { background: rgba(34,211,238, .18); color: #eafffb; border:1px solid rgba(255,255,255,.2); }
     .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 34px rgba(0,0,0,.45); }
 
-    .hero-card { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); padding: 20px; backdrop-filter: blur(6px); }
+    .hero-card { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius); padding: 20px; backdrop-filter: blur(6px); }
 
-    .hero-art { aspect-ratio: 4/3; border-radius: var(--radius); background: linear-gradient(135deg, rgba(16,185,129,.18), rgba(34,211,238,.16)); border:1px solid rgba(255,255,255,.15); position: relative; overflow:hidden; }
-    .ball { position:absolute; width:70px; height:70px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff, #dfe7e5); top: 36%; left: 10%; box-shadow: 0 16px 40px rgba(0,0,0,.25); }
-    .club { position:absolute; width: 220px; height: 16px; background: linear-gradient(90deg, #b7b7b7, #7d7d7d); top: 60%; left: -10%; transform: rotate(-15deg); border-radius:8px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-    .arc { position:absolute; inset: 0; pointer-events:none; }
-    .arc svg { width:100%; height:100%; opacity:.7; }
+    .hero-collage { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .hero-collage img { width:100%; height: 220px; object-fit: cover; border-radius: 12px; border:1px solid rgba(255,255,255,.22); box-shadow: var(--shadow); }
+    @media (min-width: 900px){ .hero-collage img{ height: 280px; } }
 
     /* ---------- Sections ---------- */
     section { padding: 56px 24px; }
@@ -94,7 +79,7 @@
     .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; }
+      header.hero .hero-inner { grid-template-columns: 1fr; }
       .grid-3 { grid-template-columns: 1fr; }
       .grid-2 { grid-template-columns: 1fr; }
     }
@@ -124,6 +109,13 @@
     .accordion details { border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 12px 14px; background: rgba(255,255,255,.03); }
     .accordion details + details { margin-top: 10px; }
     .accordion summary { cursor: pointer; font-weight:700; }
+
+    /* ---------- Gallery ---------- */
+    .gallery { display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+    @media (max-width: 900px) { .gallery { grid-template-columns: 1fr; } }
+    .gallery figure { margin:0; position:relative; overflow:hidden; border-radius: var(--radius); border:1px solid rgba(255,255,255,.12); box-shadow: var(--shadow); }
+    .gallery img { width:100%; height:260px; object-fit:cover; display:block; }
+    .gallery figcaption { position:absolute; left:0; right:0; bottom:0; padding:10px 12px; font-weight:800; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.55)); }
 
     /* ---------- Footer ---------- */
     footer { padding: 48px 24px; color: var(--muted); border-top: 1px dashed rgba(255,255,255,.12); }
@@ -156,23 +148,10 @@
       </div>
       <div>
         <div class="hero-collage" aria-label="Photos of golfers in action and scenic courses">
-          <img src="https://source.unsplash.com/800x600/?golf,pro,swing" alt="Golfer mid-swing at impact">
-          <img src="https://source.unsplash.com/800x600/?golf,drive,tee" alt="Golfer driving off the tee">
-          <img src="https://source.unsplash.com/800x600/?golf,course,links" alt="Links-style golf course at sunset">
-          <img src="https://source.unsplash.com/800x600/?golf,green,bunker" alt="Championship course green guarded by bunkers">
-        </div>
-      </div>
-        <div class="club" aria-hidden="true"></div>
-        <div class="arc" aria-hidden="true">
-          <svg viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M40 380 C 220 120, 420 120, 560 360" stroke="url(#g)" stroke-width="4" stroke-linecap="round" />
-            <defs>
-              <linearGradient id="g" x1="40" y1="380" x2="560" y2="360" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#22d3ee"/>
-                <stop offset="1" stop-color="#10b981"/>
-              </linearGradient>
-            </defs>
-          </svg>
+          <img loading="lazy" src="https://source.unsplash.com/800x600/?golf,pro,swing" alt="Golfer mid-swing at impact">
+          <img loading="lazy" src="https://source.unsplash.com/800x600/?golf,drive,tee" alt="Golfer driving off the tee">
+          <img loading="lazy" src="https://source.unsplash.com/800x600/?golf,course,links" alt="Links-style golf course at sunset">
+          <img loading="lazy" src="https://source.unsplash.com/800x600/?golf,green,bunker" alt="Championship course green guarded by bunkers">
         </div>
       </div>
     </div>
@@ -277,8 +256,35 @@
         <p class="lead">Study the shapes you want to copy. These visuals pair with your drills to build a mental model of a repeatable swing.</p>
         <div class="gallery" role="list">
           <figure role="listitem">
-            <img src="https://source.unsplash.com/1200x800/?golf,st-andrews,links" alt="Classic links course with rolling fairways">
-            <figcaption>St
+            <img loading="lazy" src="https://source.unsplash.com/1200x800/?golf,st-andrews,links" alt="Classic links course with rolling fairways">
+            <figcaption>St Andrews–style links</figcaption>
+          </figure>
+          <figure role="listitem">
+            <img loading="lazy" src="https://source.unsplash.com/1200x800/?golf,augusta,azalea" alt="Lush championship course with azaleas and water carry">
+            <figcaption>Championship azalea corner</figcaption>
+          </figure>
+          <figure role="listitem">
+            <img loading="lazy" src="https://source.unsplash.com/1200x800/?golf,pebble,coastal" alt="Coastal cliffside golf hole with ocean views">
+            <figcaption>Coastal cliffs vibe</figcaption>
+          </figure>
+          <figure role="listitem">
+            <img loading="lazy" src="https://source.unsplash.com/1200x800/?golf,pro,swing,sequence" alt="Professional golfer swing sequence silhouette">
+            <figcaption>Tour-level swing sequence</figcaption>
+          </figure>
+          <figure role="listitem">
+            <img loading="lazy" src="https://source.unsplash.com/1200x800/?golf,putting,green" alt="Golfer reading a putt on pristine green">
+            <figcaption>Green reading focus</figcaption>
+          </figure>
+          <figure role="listitem">
+            <img loading="lazy" src="https://source.unsplash.com/1200x800/?golf,bunker,shot" alt="Splash bunker shot near tournament grandstands">
+            <figcaption>Controlled bunker splash</figcaption>
+          </figure>
+        </div>
+        <p class="muted" style="margin-top:10px">Images served via Unsplash Source using descriptive queries; swap for your licensed photos for consistent branding.</p>
+      </div>
+    </section>
+
+    <!-- Drills Library -->
     <section id="drills">
       <div class="container">
         <h2>Targeted drills</h2>
@@ -344,6 +350,8 @@
         <a href="#assessment">Assessment</a>
         <span aria-hidden="true" style="opacity:.4">·</span>
         <a href="#drills">Drills</a>
+        <span aria-hidden="true" style="opacity:.4">·</span>
+        <a href="#showcase">Pros & Courses</a>
         <span aria-hidden="true" style="opacity:.4">·</span>
         <a href="#checklist">Checklist</a>
       </nav>
@@ -488,9 +496,9 @@
       $('#resultsLive').textContent = `Score ${d.score}. Priorities: ${d.top.join(', ')}.`;
 
       const fixesHtml = d.top.map(key => `
-        <div class="card">
+        <div class=\"card\">
           <strong>${key.toUpperCase()}</strong>
-          <ul style="margin:8px 0 0 18px; color:var(--muted)">
+          <ul style=\"margin:8px 0 0 18px; color:var(--muted)\">
             ${FIX_MAP[key].map(t => `<li>${t}</li>`).join('')}
           </ul>
         </div>
