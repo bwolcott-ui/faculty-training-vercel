@@ -50,7 +50,23 @@
     .pill { display:inline-flex; gap:8px; align-items:center; padding:6px 12px; border-radius:999px; background: rgba(34,211,238,.12); color: var(--text); font-weight:600; }
 
     /* ---------- Hero ---------- */
-    header.hero { position: relative; overflow: hidden; }
+    header.hero { position: relative; overflow: hidden; background-image: var(--hero, url('https://source.unsplash.com/1600x900/?golf,tee,course')); background-size: cover; background-position: center; }
+    header.hero::before { content: ""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25) 35%, rgba(0,0,0,.55)); mix-blend: multiply; }
+    header.hero .hero-inner { position: relative; z-index: 1; }
+    .image-credit { position:absolute; right:12px; bottom:8px; font-size:12px; color: rgba(255,255,255,.8); backdrop-filter: blur(6px); background: rgba(0,0,0,.25); padding:4px 8px; border-radius:999px; }
+    .hero-collage { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .hero-collage img { width:100%; height: 200px; object-fit: cover; border-radius: 12px; border:1px solid rgba(255,255,255,.15); box-shadow: var(--shadow); }
+    @media (min-width: 900px){ .hero-collage img{ height: 260px; } }
+    .card.photo { padding:0; overflow:hidden; }
+    .card.photo img{ display:block; width:100%; height:220px; object-fit:cover; }
+    .card.photo .cap{ padding:12px 14px; }
+
+    /* ---------- Gallery ---------- */
+    .gallery { display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+    @media (max-width: 900px) { .gallery { grid-template-columns: 1fr; } }
+    .gallery figure { margin:0; position:relative; overflow:hidden; border-radius: var(--radius); border:1px solid rgba(255,255,255,.12); box-shadow: var(--shadow); }
+    .gallery img { width:100%; height:260px; object-fit:cover; display:block; }
+    .gallery figcaption { position:absolute; left:0; right:0; bottom:0; padding:10px 12px; font-weight:800; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.55)); }
     .hero-inner { display:grid; grid-template-columns: 1.2fr 1fr; gap:32px; align-items:center; padding: 48px 24px 24px; }
     .title { font-size: clamp(32px, 4vw, 56px); line-height:1.05; letter-spacing:-.02em; margin: 8px 0 12px; }
     .subtitle { font-size: clamp(16px, 2.2vw, 20px); color: var(--muted); max-width: 60ch; }
@@ -138,8 +154,14 @@
           </ul>
         </div>
       </div>
-      <div class="hero-art" aria-label="Illustration of golf swing arc">
-        <div class="ball" aria-hidden="true"></div>
+      <div>
+        <div class="hero-collage" aria-label="Photos of golfers in action and scenic courses">
+          <img src="https://source.unsplash.com/800x600/?golf,pro,swing" alt="Golfer mid-swing at impact">
+          <img src="https://source.unsplash.com/800x600/?golf,drive,tee" alt="Golfer driving off the tee">
+          <img src="https://source.unsplash.com/800x600/?golf,course,links" alt="Links-style golf course at sunset">
+          <img src="https://source.unsplash.com/800x600/?golf,green,bunker" alt="Championship course green guarded by bunkers">
+        </div>
+      </div>
         <div class="club" aria-hidden="true"></div>
         <div class="arc" aria-hidden="true">
           <svg viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -248,7 +270,15 @@
       </div>
     </section>
 
-    <!-- Drills Library -->
+    <!-- Showcase: Pros & Courses -->
+    <section id="showcase">
+      <div class="container">
+        <h2>Pro inspiration & iconic courses</h2>
+        <p class="lead">Study the shapes you want to copy. These visuals pair with your drills to build a mental model of a repeatable swing.</p>
+        <div class="gallery" role="list">
+          <figure role="listitem">
+            <img src="https://source.unsplash.com/1200x800/?golf,st-andrews,links" alt="Classic links course with rolling fairways">
+            <figcaption>St
     <section id="drills">
       <div class="container">
         <h2>Targeted drills</h2>
@@ -490,3 +520,4 @@
   </script>
 </body>
 </html>
+
