@@ -1,25 +1,492 @@
-<main style="font-family:system-ui;padding:2rem;line-height:1.6;max-width:720px;margin:auto;text-align:center">
-  <h1 style="font-size:2.5rem;font-weight:700">
-    Hello Brentwood Web Designers 👋
-  </h1>
-  <p style="font-size:1.25rem;margin-top:1rem">
-    You ready to hack away???
-  </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fix Your Golf Swing | Simple Self‑Assessment, Drills & Plan</title>
+  <meta name="description" content="A clean, fast site that helps golfers quickly diagnose common swing faults and get a personalized practice plan with drills and checkpoints." />
+  <meta name="theme-color" content="#0b7d5c" />
+  <meta property="og:title" content="Fix Your Golf Swing" />
+  <meta property="og:description" content="Self‑assess your swing, learn fundamentals, and get a practice plan in minutes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0b7d5c/ffffff&text=Fix+Your+Golf+Swing" />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    /* ---------- Design tokens ---------- */
+    :root {
+      --bg: #0b0c10;
+      --bg-soft: #111318;
+      --card: #151923;
+      --text: #e8f1ee;
+      --muted: #b8c7c1;
+      --brand: #10b981; /* emerald-500 */
+      --brand-600: #059669;
+      --accent: #22d3ee; /* cyan-400 */
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --maxw: 1200px;
+      --focus: 0 0 0 3px rgba(34,211,238,.45);
+    }
 
-  <p style="margin-top:2rem">
-    This site is deployed on <strong>Vercel</strong> using <em>Serverless Functions</em> — no installs, no setup, just creativity and code.
-  </p>
+    @media (prefers-color-scheme: light) {
+      :root { --bg: #f7faf9; --bg-soft: #f1f5f4; --card:#ffffff; --text:#0b1320; --muted:#5b6b66; }
+      body { background: linear-gradient(180deg, #f7faf9 0%, #ecf7f3 100%); }
+    }
 
-  <p style="margin-top:2rem">
-    Try your first API endpoint:  
-    <a href="/api/hello" style="font-weight:600;color:#0051ff">/api/hello</a>
-  </p>
+    /* ---------- Base ---------- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text); background: radial-gradient(1000px 600px at 70% -200px, rgba(34,211,238,.06), transparent),
+      radial-gradient(700px 500px at -10% 0, rgba(16,185,129,.07), transparent), var(--bg);
+      font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-  <hr style="margin:2rem 0">
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 24px; }
+    .pill { display:inline-flex; gap:8px; align-items:center; padding:6px 12px; border-radius:999px; background: rgba(34,211,238,.12); color: var(--text); font-weight:600; }
 
-  <p style="font-size:0.95rem;color:#555">
-    Tip: Set an environment variable named <code>GREETING_NAME</code> in  
-    <strong>Vercel → Project → Settings → Environment Variables</strong>, then redeploy.  
-    Your API will greet you personally next time 🚀
-  </p>
-</main>
+    /* ---------- Hero ---------- */
+    header.hero { position: relative; overflow: hidden; }
+    .hero-inner { display:grid; grid-template-columns: 1.2fr 1fr; gap:32px; align-items:center; padding: 48px 24px 24px; }
+    .title { font-size: clamp(32px, 4vw, 56px); line-height:1.05; letter-spacing:-.02em; margin: 8px 0 12px; }
+    .subtitle { font-size: clamp(16px, 2.2vw, 20px); color: var(--muted); max-width: 60ch; }
+
+    .cta { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
+    .btn { cursor:pointer; border:none; border-radius: 12px; padding: 14px 18px; font-weight:700; box-shadow: var(--shadow); transition: transform .12s ease, box-shadow .12s ease; }
+    .btn-primary { background: linear-gradient(135deg, var(--brand) 0%, var(--brand-600) 100%); color:#06261d; }
+    .btn-ghost { background: rgba(34,211,238, .12); color: var(--text); }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 34px rgba(0,0,0,.45); }
+
+    .hero-card { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); padding: 20px; backdrop-filter: blur(6px); }
+
+    .hero-art { aspect-ratio: 4/3; border-radius: var(--radius); background: linear-gradient(135deg, rgba(16,185,129,.18), rgba(34,211,238,.16)); border:1px solid rgba(255,255,255,.15); position: relative; overflow:hidden; }
+    .ball { position:absolute; width:70px; height:70px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff, #dfe7e5); top: 36%; left: 10%; box-shadow: 0 16px 40px rgba(0,0,0,.25); }
+    .club { position:absolute; width: 220px; height: 16px; background: linear-gradient(90deg, #b7b7b7, #7d7d7d); top: 60%; left: -10%; transform: rotate(-15deg); border-radius:8px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    .arc { position:absolute; inset: 0; pointer-events:none; }
+    .arc svg { width:100%; height:100%; opacity:.7; }
+
+    /* ---------- Sections ---------- */
+    section { padding: 56px 24px; }
+    h2 { font-size: clamp(24px, 3vw, 34px); margin: 0 0 12px; letter-spacing:-.01em; }
+    p.lead { color: var(--muted); margin: 0 0 24px; max-width: 75ch; }
+
+    .grid { display:grid; gap:18px; }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin: 0 0 8px; font-size: 20px; }
+    .muted { color: var(--muted); }
+
+    /* ---------- Assessment ---------- */
+    .meter { display:grid; gap:8px; }
+    .meter label { display:flex; justify-content:space-between; font-weight:600; }
+    .meter input[type=range] { width:100%; accent-color: var(--brand); }
+    .score { font-weight: 800; font-size: 28px; }
+    .badge { display:inline-block; border-radius:999px; padding:6px 10px; font-size:12px; font-weight:700; background: rgba(16,185,129,.14); color: var(--text); border:1px solid rgba(16,185,129,.35); }
+
+    /* ---------- Drills ---------- */
+    .chip { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.03); cursor:pointer; }
+    .chip[aria-pressed=true] { outline: none; border-color: var(--brand); box-shadow: var(--focus); }
+    .drill { display:grid; gap:8px; }
+    .drill small { color: var(--muted); }
+
+    /* ---------- Checklist ---------- */
+    .checklist li { display:flex; align-items:flex-start; gap:10px; padding:8px 0; }
+    .checklist input { transform: translateY(4px); accent-color: var(--brand); }
+
+    /* ---------- Accordion ---------- */
+    .accordion details { border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 12px 14px; background: rgba(255,255,255,.03); }
+    .accordion details + details { margin-top: 10px; }
+    .accordion summary { cursor: pointer; font-weight:700; }
+
+    /* ---------- Footer ---------- */
+    footer { padding: 48px 24px; color: var(--muted); border-top: 1px dashed rgba(255,255,255,.12); }
+
+    /* ---------- Utilities ---------- */
+    .flex { display:flex; gap:12px; align-items:center; }
+    .right { justify-content:flex-end; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="pill" aria-hidden="true">🏌️‍♂️ Fix your swing in weeks, not years</span>
+        <h1 class="title">A smarter way to build a repeatable golf swing</h1>
+        <p class="subtitle">Diagnose the <strong>one or two</strong> faults costing you strokes, then follow a focused plan of drills and checkpoints designed by fundamentals—not fads.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#assessment">Start self‑assessment</a>
+          <a class="btn btn-ghost" href="#drills">Browse drills</a>
+        </div>
+        <div class="hero-card" style="margin-top:18px">
+          <strong>What you'll do here</strong>
+          <ul class="muted" style="margin:10px 0 0 18px">
+            <li>Rate a few swing tendencies (slice, hook, heavy, thin, tempo)</li>
+            <li>Get a simple score + diagnosis</li>
+            <li>Download a customized practice plan</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of golf swing arc">
+        <div class="ball" aria-hidden="true"></div>
+        <div class="club" aria-hidden="true"></div>
+        <div class="arc" aria-hidden="true">
+          <svg viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M40 380 C 220 120, 420 120, 560 360" stroke="url(#g)" stroke-width="4" stroke-linecap="round" />
+            <defs>
+              <linearGradient id="g" x1="40" y1="380" x2="560" y2="360" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#22d3ee"/>
+                <stop offset="1" stop-color="#10b981"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Fundamentals -->
+    <section id="fundamentals">
+      <div class="container">
+        <h2>Start with the <em>G.A.S.P.</em> fundamentals</h2>
+        <p class="lead">Grip · Alignment · Stance · Posture. Get these 80% right and your swing gets 80% easier. Use the checkpoints below before you ever swing.</p>
+        <div class="grid grid-4 grid-2 grid-3">
+          <div class="card">
+            <h3>Grip</h3>
+            <p class="muted">V's between thumb & forefinger point toward right shoulder (right‑handed). Pressure 4/10.</p>
+          </div>
+          <div class="card">
+            <h3>Alignment</h3>
+            <p class="muted">Feet, knees, hips, shoulders parallel to target line. Club face aimed at target.</p>
+          </div>
+          <div class="card">
+            <h3>Stance</h3>
+            <p class="muted">Ball forward with longer clubs; shoulder‑width with irons. Weight balanced mid‑foot.</p>
+          </div>
+          <div class="card">
+            <h3>Posture</h3>
+            <p class="muted">Hip hinge, neutral spine, slight knee flex, arms hang naturally. Chin up for shoulder turn.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Self Assessment -->
+    <section id="assessment">
+      <div class="container">
+        <h2>Self‑assessment</h2>
+        <p class="lead">Slide each control to rate how often you notice the tendency <strong>today</strong>. You'll get a score + the top fixes to work on this week.</p>
+
+        <div class="grid grid-2">
+          <form id="form" class="card" aria-describedby="resultsLive">
+            <div class="meter">
+              <label for="slice">Slice (curves right)
+                <span><output id="sliceOut">0</output>/10</span>
+              </label>
+              <input type="range" id="slice" name="slice" min="0" max="10" value="0" aria-label="Slice frequency"/>
+
+              <label for="hook">Hook (curves left)
+                <span><output id="hookOut">0</output>/10</span>
+              </label>
+              <input type="range" id="hook" name="hook" min="0" max="10" value="0" aria-label="Hook frequency"/>
+
+              <label for="fat">Heavy / Chunked (ground before ball)
+                <span><output id="fatOut">0</output>/10</span>
+              </label>
+              <input type="range" id="fat" name="fat" min="0" max="10" value="0" aria-label="Fat shots"/>
+
+              <label for="thin">Thin / Topped (ball before ground)
+                <span><output id="thinOut">0</output>/10</span>
+              </label>
+              <input type="range" id="thin" name="thin" min="0" max="10" value="0" aria-label="Thin shots"/>
+
+              <label for="tempo">Tempo (rushed backswing / transition)
+                <span><output id="tempoOut">0</output>/10</span>
+              </label>
+              <input type="range" id="tempo" name="tempo" min="0" max="10" value="0" aria-label="Tempo issues"/>
+
+              <label for="ott">Over‑the‑top (outside‑in path)
+                <span><output id="ottOut">0</output>/10</span>
+              </label>
+              <input type="range" id="ott" name="ott" min="0" max="10" value="0" aria-label="Over the top"/>
+            </div>
+
+            <hr style="opacity:.2; margin:18px 0;"/>
+            <div class="flex right">
+              <button type="button" class="btn" onclick="resetForm()">Reset</button>
+              <button type="submit" class="btn btn-primary">Get practice plan</button>
+            </div>
+          </form>
+
+          <aside class="card" id="results">
+            <div class="flex" style="justify-content:space-between; align-items:flex-start;">
+              <div>
+                <div class="badge">Your swing score</div>
+                <div class="score" id="score">–</div>
+              </div>
+              <div>
+                <button class="chip" type="button" onclick="downloadPlan()">⬇️ Download Plan</button>
+              </div>
+            </div>
+            <p id="summary" class="muted">Move the sliders and submit to see your results.</p>
+            <div id="topFixes" class="grid"></div>
+            <div class="sr-only" id="resultsLive" aria-live="polite"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Drills Library -->
+    <section id="drills">
+      <div class="container">
+        <h2>Targeted drills</h2>
+        <p class="lead">Pick drills linked to the faults above. Keep sessions short (30–45 min) with clear reps and rests.</p>
+
+        <div class="flex" style="flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+          <button class="chip" type="button" data-filter="all" aria-pressed="true" onclick="filterDrills('all', this)">All</button>
+          <button class="chip" type="button" data-filter="slice" onclick="filterDrills('slice', this)">Slice</button>
+          <button class="chip" type="button" data-filter="hook" onclick="filterDrills('hook', this)">Hook</button>
+          <button class="chip" type="button" data-filter="fat" onclick="filterDrills('fat', this)">Heavy</button>
+          <button class="chip" type="button" data-filter="thin" onclick="filterDrills('thin', this)">Thin</button>
+          <button class="chip" type="button" data-filter="tempo" onclick="filterDrills('tempo', this)">Tempo</button>
+          <button class="chip" type="button" data-filter="ott" onclick="filterDrills('ott', this)">Over‑the‑top</button>
+        </div>
+
+        <div id="drillList" class="grid grid-3"></div>
+      </div>
+    </section>
+
+    <!-- Checklists -->
+    <section id="checklist">
+      <div class="container">
+        <h2>Pre‑shot checklist</h2>
+        <p class="lead">A 15‑second routine to set up consistency. Print it or keep it on your phone.</p>
+        <div class="card">
+          <ol class="checklist">
+            <li><input type="checkbox" id="c1" /> <label for="c1"><strong>Pick a very small target.</strong> Small aim → small miss.</label></li>
+            <li><input type="checkbox" id="c2" /> <label for="c2"><strong>Clubface square.</strong> Aim the <em>face</em>, then set your stance parallel to the line.</label></li>
+            <li><input type="checkbox" id="c3" /> <label for="c3"><strong>Grip neutral.</strong> Check the lead hand knuckles (2–3 visible).</label></li>
+            <li><input type="checkbox" id="c4" /> <label for="c4"><strong>Posture & balance.</strong> Hinge at hips, athletic, weight mid‑foot.</label></li>
+            <li><input type="checkbox" id="c5" /> <label for="c5"><strong>Tempo cue.</strong> 2:1 back‑to‑through (e.g., “smooth‑and‑thru”).</label></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ / Tips -->
+    <section id="faq">
+      <div class="container">
+        <h2>Tips & FAQ</h2>
+        <div class="accordion">
+          <details>
+            <summary>Should I try to keep my head down?</summary>
+            <p class="muted">Not rigidly—let it rotate naturally with your shoulder turn. Think “steady head, free turn.”</p>
+          </details>
+          <details>
+            <summary>What does “over‑the‑top” look like?</summary>
+            <p class="muted">Club path moves outside the target line on the downswing, cutting across the ball. Often from open face + rushed transition. Fix with shallowing rehearsals & face control drills.</p>
+          </details>
+          <details>
+            <summary>Best way to practice at the range?</summary>
+            <p class="muted">Start with wedges, block 10–15 reps per drill, add variability (different clubs/targets), finish with 3‑ball “up‑and‑down” challenge.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container flex" style="justify-content:space-between; align-items:center; flex-wrap:wrap;">
+      <div>© <span id="year"></span> Fix Your Golf Swing</div>
+      <nav class="flex" aria-label="Footer">
+        <a href="#assessment">Assessment</a>
+        <span aria-hidden="true" style="opacity:.4">·</span>
+        <a href="#drills">Drills</a>
+        <span aria-hidden="true" style="opacity:.4">·</span>
+        <a href="#checklist">Checklist</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Utility: get element
+    const $ = (s) => document.querySelector(s);
+
+    // Year
+    $('#year').textContent = new Date().getFullYear();
+
+    // Keep outputs in sync with ranges
+    const pairs = [
+      ['slice', 'sliceOut'], ['hook','hookOut'], ['fat','fatOut'], ['thin','thinOut'], ['tempo','tempoOut'], ['ott','ottOut']
+    ];
+    pairs.forEach(([id, out]) => {
+      const input = document.getElementById(id);
+      const output = document.getElementById(out);
+      input.addEventListener('input', () => output.value = input.value);
+      output.value = input.value;
+    });
+
+    // Drill data
+    const DRILLS = [
+      { id:'d1', tag:'slice', title:'Closed‑door swing (path → in‑to‑out)', mins:10, reps:'3×8 slow reps', desc:'Make back‑swing with trail hip to wall; swing keeping hands inside “door frame”.', yt:'https://www.youtube.com/results?search_query=slice+golf+fix+in+to+out+drill' },
+      { id:'d2', tag:'slice', title:'Face control checkpoints', mins:8, reps:'2×10', desc:'Bow lead wrist slightly at the top; hold a ¾ finish with square face.', yt:'https://www.youtube.com/results?search_query=bowed+lead+wrist+golf+drill' },
+      { id:'d3', tag:'hook', title:'Hold‑off fades (face discipline)', mins:8, reps:'3×6', desc:'Intend a small fade; shorten backswing; hold face slightly open through exit.', yt:'https://www.youtube.com/results?search_query=hold+off+fade+golf+drill' },
+      { id:'d4', tag:'fat', title:'Low‑point line (spray foot powder)', mins:12, reps:'4×6', desc:'Draw a line, strike ball just ahead of the line. Move low point forward.', yt:'https://www.youtube.com/results?search_query=low+point+control+golf+drill' },
+      { id:'d5', tag:'thin', title:'Tee‑gate strike', mins:10, reps:'3×8', desc:'Two tees outside ball; brush ground between them to center contact.', yt:'https://www.youtube.com/results?search_query=center+contact+tee+gate+drill' },
+      { id:'d6', tag:'tempo', title:'2‑to‑1 metronome swings', mins:6, reps:'2×12', desc:'Count “one‑two” back, “three” through. Smooth transition.', yt:'https://www.youtube.com/results?search_query=golf+tempo+2:1+drill' },
+      { id:'d7', tag:'ott', title:'Pump shallowing (split‑hand)', mins:10, reps:'3×6', desc:'Split hands, rehearse shallowing with trail elbow in; then hit normally.', yt:'https://www.youtube.com/results?search_query=over+the+top+golf+drill+shallowing' },
+      { id:'d8', tag:'fat', title:'Pressure shift step‑through', mins:8, reps:'3×6', desc:'Small step to lead foot before impact to shift low point forward.', yt:'https://www.youtube.com/results?search_query=step+through+drill+golf' },
+      { id:'d9', tag:'tempo', title:'Pause at the top (3‑count)', mins:6, reps:'2×10', desc:'Back to the top, pause for “one”, then swing. Trains sequence.', yt:'https://www.youtube.com/results?search_query=pause+at+top+golf+drill' },
+      { id:'d10', tag:'thin', title:'Towel under arms (connection)', mins:8, reps:'3×8', desc:'Keep towel lightly under arms to sync body & arms.', yt:'https://www.youtube.com/results?search_query=towel+under+arms+golf+drill' }
+    ];
+
+    // Render drills
+    const drillList = document.getElementById('drillList');
+    function renderDrills(list = DRILLS) {
+      drillList.innerHTML = list.map(d => `
+        <article class="card drill" data-tag="${d.tag}" id="${d.id}">
+          <div class="flex" style="justify-content:space-between; align-items:flex-start;">
+            <h3 style="margin:0">${d.title}</h3>
+            <a class="chip" href="${d.yt}" target="_blank" rel="noopener">▶️ Watch</a>
+          </div>
+          <small>${d.reps} · ~${d.mins} min</small>
+          <p class="muted">${d.desc}</p>
+          <div class="muted">Tag: <span class="badge" aria-label="Category">${d.tag}</span></div>
+        </article>
+      `).join('');
+    }
+    renderDrills();
+
+    function filterDrills(tag, el) {
+      document.querySelectorAll('#drills .chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+      el.setAttribute('aria-pressed', 'true');
+      if (tag === 'all') return renderDrills();
+      renderDrills(DRILLS.filter(d => d.tag === tag));
+    }
+
+    // Assessment logic
+    const FIX_MAP = {
+      slice: ['Close the face earlier (lead wrist bow).', 'Train in‑to‑out path with alignment stick.', 'Ball forward, stance slightly closed.'],
+      hook: ['Strengthen face control—grip a touch weaker.', 'Hold‑off finish to train face stability.', 'Add alignment stick for start line.'],
+      fat: ['Move low point forward—pressure shift to lead foot.', 'Keep hands ahead at impact.', 'Brush ground after the ball line.'],
+      thin: ['Maintain posture—don’t early extend.', 'Extend arms through impact (no chicken wing).', 'Brush the turf, not the top.'],
+      tempo: ['Use 2:1 rhythm (e.g., 0.8s back / 0.4s through).', 'Soften grip pressure to 4/10.', 'Shorten backswing to chest‑high.'],
+      ott: ['Shallow in transition: trail elbow in, lay the shaft down.', 'Keep back to target a fraction longer.', 'Start down from the ground up.']
+    };
+
+    function diagnose(values) {
+      // Weighted sum. Higher = more issues. Score out of 100 where lower is better.
+      const raw = values.slice + values.hook + values.fat + values.thin + values.tempo + (values.ott * 1.2);
+      const pct = Math.max(0, Math.min(100, Math.round(100 - (raw / 72) * 100)));
+      // Top 2 issues
+      const entries = Object.entries(values).sort((a,b) => b[1]-a[1]);
+      const top = entries.slice(0,2).map(([k]) => k);
+      return { score: pct, top };
+    }
+
+    function resetForm() {
+      document.getElementById('form').reset();
+      pairs.forEach(([id, out]) => document.getElementById(out).value = document.getElementById(id).value);
+      $('#score').textContent = '–';
+      $('#summary').textContent = 'Move the sliders and submit to see your results.';
+      $('#topFixes').innerHTML = '';
+      localStorage.removeItem('swingPlan');
+    }
+
+    function buildPlan(d) {
+      const lines = [
+        'Fix Your Golf Swing – Practice Plan',
+        '-----------------------------------',
+        `Score: ${d.score}/100`,
+        `Focus faults: ${d.top.join(', ')}`,
+        '',
+        'Session template (45 min):',
+        '- 5 min G.A.S.P. setup checks',
+        `- 10 min Drill A (${d.top[0]} focused)`,
+        `- 10 min Drill B (${d.top[1] || d.top[0]})`,
+        '- 10 min Variability (change club/target each rep)',
+        '- 10 min On‑course simulation (pre‑shot routine)',
+        '',
+        'Top fixes:'
+      ];
+      d.top.forEach(k => {
+        lines.push(`• ${k.toUpperCase()}: ${FIX_MAP[k][0]} | ${FIX_MAP[k][1]} | ${FIX_MAP[k][2]}`);
+      });
+      lines.push('\nDrill ideas:');
+      d.top.forEach(tag => {
+        DRILLS.filter(dr => dr.tag === tag).slice(0,2).forEach(dr => {
+          lines.push(`• ${dr.title} (${dr.reps}, ~${dr.mins} min)`);
+        });
+      });
+      return lines.join('\n');
+    }
+
+    function downloadPlan() {
+      const data = localStorage.getItem('swingPlan');
+      if (!data) { alert('Run the self‑assessment first to generate your plan.'); return; }
+      const blob = new Blob([data], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'golf-swing-plan.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const values = Object.fromEntries(new FormData(e.target).entries());
+      Object.keys(values).forEach(k => values[k] = Number(values[k]));
+      const d = diagnose(values);
+      const plan = buildPlan(d);
+      localStorage.setItem('swingPlan', plan);
+
+      // UI updates
+      $('#score').textContent = d.score;
+      $('#summary').textContent = `Focus on: ${d.top.map(x=>x.toUpperCase()).join(' & ')}. See drills below and download your plan.`;
+      $('#resultsLive').textContent = `Score ${d.score}. Priorities: ${d.top.join(', ')}.`;
+
+      const fixesHtml = d.top.map(key => `
+        <div class="card">
+          <strong>${key.toUpperCase()}</strong>
+          <ul style="margin:8px 0 0 18px; color:var(--muted)">
+            ${FIX_MAP[key].map(t => `<li>${t}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+      $('#topFixes').innerHTML = fixesHtml;
+      // Scroll into view on mobile
+      document.getElementById('results').scrollIntoView({ behavior:'smooth', block: 'start' });
+    });
+
+    // Respect reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.style.scrollBehavior = 'auto';
+    }
+  </script>
+
+  <!-- Structured data for FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Should I try to keep my head down?", "acceptedAnswer": {"@type": "Answer", "text": "Not rigidly—let it rotate naturally with your shoulder turn. Think ‘steady head, free turn.’"}},
+      {"@type": "Question", "name": "What does over-the-top look like?", "acceptedAnswer": {"@type": "Answer", "text": "Club path moves outside the target line on the downswing, cutting across the ball. Often from open face + rushed transition. Fix with shallowing rehearsals & face control drills."}},
+      {"@type": "Question", "name": "Best way to practice at the range?", "acceptedAnswer": {"@type": "Answer", "text": "Start with wedges, block 10–15 reps per drill, add variability (different clubs/targets), finish with 3-ball ‘up-and-down’ challenge."}}
+    ]
+  }
+  </script>
+</body>
+</html>
